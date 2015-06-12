@@ -7,19 +7,23 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class DrawingClass extends View {
 
 
-    Paint paint;
+    Paint bluePaint;
 
 
     public DrawingClass (Context context) {
         super(context);
 
-        paint = new Paint();
-        paint.setARGB(0, 0, 0, 0);
+        setWillNotDraw(false);
+
+        bluePaint = new Paint();
+        bluePaint.setColor(Color.BLUE);
+
 
         }
 
@@ -33,7 +37,10 @@ public class DrawingClass extends View {
             Log.d("Drawing: ", "Drawing");
 
 
-            canvas.drawCircle(100, 100, 100, paint);
+            canvas.drawCircle(100, 100, 100, bluePaint);
+            canvas.drawPoint(canvas.getWidth() / 2, canvas.getHeight() / 2, bluePaint);
+
+            Log.d("Canvas Height/Width: ", canvas.getHeight() + " " + canvas.getWidth());
 
 
 

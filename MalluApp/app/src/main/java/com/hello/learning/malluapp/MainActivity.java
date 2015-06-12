@@ -83,29 +83,38 @@ public class MainActivity extends Activity {
     public boolean onTouchEvent(MotionEvent e) {
 
 
-        tappedTwice = !tappedTwice;
+        //tappedTwice = !tappedTwice;
 
         float touchX = e.getX();
         float touchY = e.getY();
 
-        
+
 
         Log.d("Touch: ", touchX + "," + touchY);
+
 
         // get the current view so u can draw
         View view = getWindow().getDecorView().findViewById(android.R.id.content);
 
+
         d = new DrawingClass(this);
 
+
+
         if (imageCanvas != null) {
+
+            // view.draw(imageCanvas);
+
             Log.d("imageCanvas: ", "not null");
-            d.draw(imageCanvas);
+           d.draw(imageCanvas);
+//            d.invalidate();
         }
 
         return true;
 
 
     }
+
 
 
 
