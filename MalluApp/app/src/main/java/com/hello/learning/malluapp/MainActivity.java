@@ -105,8 +105,14 @@ public class MainActivity extends Activity {
 
             // view.draw(imageCanvas);
 
+            Paint yellowPaint = new Paint();
+            yellowPaint.setColor(Color.YELLOW);
+
+            // try drawing directly?
+            imageCanvas.drawColor(Color.BLUE);
+
             Log.d("imageCanvas: ", "not null");
-           d.draw(imageCanvas);
+         //  d.draw(imageCanvas);
 //            d.invalidate();
         }
 
