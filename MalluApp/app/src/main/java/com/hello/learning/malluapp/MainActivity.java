@@ -31,6 +31,8 @@ import java.io.FileNotFoundException;
 
 public class MainActivity extends Activity {
 
+    DrawingClass d;
+
     Button loadPictureButton;
     Button takePictureButton;
     ImageView image;
@@ -61,6 +63,9 @@ public class MainActivity extends Activity {
         image = (ImageView) findViewById(R.id.imageView);
 
 
+
+
+
         loadPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +73,8 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, 0);
             }
         });
+
+
 
     }
 
@@ -81,113 +88,25 @@ public class MainActivity extends Activity {
         float touchX = e.getX();
         float touchY = e.getY();
 
-        //Log.d("Touch: ", touchX + "," + touchY);
+        
+
+        Log.d("Touch: ", touchX + "," + touchY);
 
         // get the current view so u can draw
         View view = getWindow().getDecorView().findViewById(android.R.id.content);
-        DrawingClass d = new DrawingClass(this);
-        d.invalidate();
 
+        d = new DrawingClass(this);
+
+        if (imageCanvas != null) {
+            Log.d("imageCanvas: ", "not null");
+            d.draw(imageCanvas);
+        }
 
         return true;
 
 
     }
 
-
-
-
-    public class DrawingClass extends View {
-
-        public DrawingClass (Context context) {
-            super(context);
-        }
-
-
-        @Override
-         public void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-
-            Log.d("Drawing: ", "Drawing");
-
-            canvas.drawARGB(100, 100, 100, 100);
-
-        }
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // just use onDraw
-    public void drawPoint(Canvas canvas, float x, float y) {
-
-        Paint black = new Paint();
-        black.setARGB(255, 100, 10, 70);
-
-        canvas.drawARGB(100, 100, 100, 100);
-
-//        canvas.drawPoint(x, y, black);
-
-    }
-
-
-    // just use onDraw
-    public void drawRectangle(Canvas canvas) {
-
-
-        float left = 0, right = 0, top = 0, bottom = 0;
-
-        // range-checking to correctly assign left, right, up and down coordinates for rectf
-        if (upperX < lowerX) {
-            left = upperX;
-            right = lowerX;
-        }
-
-        else if (lowerX < upperX) {
-            left = lowerX;
-            right = lowerX;
-        }
-
-        if (upperY < lowerY) {
-            bottom = upperY;
-            top = lowerY;
-        }
-
-        else if (lowerY < upperY) {
-            bottom = lowerY;
-            top = upperY;
-        }
-
-        faceRectangle = new RectF(left, top, right, bottom);
-
-        Paint black = new Paint();
-        black.setARGB(24, 0, 0, 0);
-
-        canvas.drawRect(faceRectangle, black);
-
-        Log.d("Draw: ", "Drew rectangle");
-
-    }
 
 
     @Override
@@ -211,6 +130,7 @@ public class MainActivity extends Activity {
 
                 // initialize the canvas that we will draw on
                 imageCanvas = new Canvas(drawableBitmap);
+                Log.d("imageCanvas:", " successfuly created");
             }
 
             catch (FileNotFoundException e) {
